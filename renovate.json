@@ -1,0 +1,12 @@
+{
+  "baseBranches": [
+      "main"
+  ],
+  "configMigration": true,
+  "extends": [
+      "config:recommended",
+      "group:allNonMajor",
+      ":semanticCommits"
+  ],
+  "rangeStrategy": "pin"
+}
