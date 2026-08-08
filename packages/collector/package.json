@@ -1,0 +1,10 @@
+{
+  "name": "collector",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "dotnet build NetworkMonitorCollector.csproj -c Release"
+  },
+  "author": "",
+  "license": "ISC"
+}
