@@ -4,6 +4,7 @@ import vitest from '@vitest/eslint-plugin';
 import noSecrets from 'eslint-plugin-no-secrets';
 import perfectionist from 'eslint-plugin-perfectionist';
 import pluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import html from '@html-eslint/eslint-plugin';
 
 import pluginSecurity from 'eslint-plugin-security';
 import { configs as tsEslintConfig } from 'typescript-eslint';
@@ -12,7 +13,6 @@ import eslintIgnore from './eslint.ignore.ts';
 
 export default defineConfig(
   eslintIgnore,
-  pluginPrettierRecommended,
   pluginSecurity.configs.recommended,
 
   // Basis-Regeln für alle Files
@@ -70,7 +70,6 @@ export default defineConfig(
       vitest,
       perfectionist
     },
-    processor: processInlineTemplates,
     rules: {
       'no-debugger': 'warn',
       // START
@@ -126,5 +125,18 @@ export default defineConfig(
         }
       ]
     }
-  }
+  },
+  {
+    files: ['**/*.html'],
+    ...html.configs['flat/recommended'],
+    rules: {
+      '@html-eslint/no-duplicate-class': 'error',
+      '@html-eslint/no-duplicate-id': 'error',
+      '@html-eslint/no-obsolete-tags': 'warn',
+      '@html-eslint/no-obsolete-attrs': 'warn',
+      '@html-eslint/require-img-alt': 'warn',
+      '@html-eslint/require-button-type': 'warn'
+    }
+  },
+  pluginPrettierRecommended
 );
