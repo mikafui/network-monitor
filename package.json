@@ -10,7 +10,10 @@
     "test:ui": "vitest --ui",
     "test:project:components": "vitest --project components",
     "test:coverage": "vitest run --coverage",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:collector": "npm run build --workspace=collector",
+    "build:display": "npm run build --workspace=display",
+    "build": "npm run build:collector && npm run build:display"
   },
   "type": "module",
   "private": true,
