@@ -41,7 +41,7 @@
       "*.css": "css",
       "*.pcss": "css"
     },
-    "dotnet.defaultSolution": "packages/collector/NetworkMonitorCollector/NetworkMonitorCollector.slnx",
+    "dotnet.defaultSolution": "packages/collector/NetworkMonitorCollector.slnx",
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#206895",
       "activityBar.background": "#206895",
