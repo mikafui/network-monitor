@@ -1,6 +1,7 @@
 {
   "name": "network-monitor",
   "version": "0.0.0",
+  "main": "packages/display/dist/main.js",
   "scripts": {
     "lint": "npm run lint:es && npm run lint:style",
     "lint:es": "eslint --fix --flag unstable_native_nodejs_ts_config .",
@@ -13,7 +14,25 @@
     "prepare": "husky",
     "build:collector": "npm run build --workspace=collector",
     "build:display": "npm run build --workspace=display",
-    "build": "npm run build:collector && npm run build:display"
+    "build": "npm run build:collector && npm run build:display",
+    "publish:collector": "npm run publish --workspace=collector",
+    "package": "npm run publish:collector && npm run build:display && electron-builder --win"
+  },
+  "build": {
+    "appId": "de.mikafui.networkmonitor",
+    "productName": "Network Monitor",
+    "directories": { "output": "dist" },
+    "files": ["packages/display/dist/**/*", "packages/display/package.json"],
+    "extraResources": [
+      { "from": "packages/collector/dist", "to": "collector" },
+      { "from": "assets/icon.png", "to": "icon.png" }
+    ],
+    "win": {
+      "target": "portable",
+      "artifactName": "${productName}.${ext}",
+      "icon": "assets/icon.ico",
+      "requestedExecutionLevel": "asInvoker"
+    }
   },
   "type": "module",
   "private": true,
@@ -52,7 +71,8 @@
     "stylelint-config-standard-scss": "17.0.0",
     "stylelint-prettier": "5.0.3",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.46.2"
+    "typescript-eslint": "8.46.2",
+    "electron-builder": "26.15.3"
   },
   "workspaces": [
     "./packages/*"
