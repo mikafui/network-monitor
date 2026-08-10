@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "dotnet run --project NetworkMonitorCollector.csproj",
-    "build": "dotnet build NetworkMonitorCollector.csproj -c Release"
+    "build": "dotnet build NetworkMonitorCollector.csproj -c Release",
+    "publish": "dotnet publish NetworkMonitorCollector.csproj -c Release -r win-x64 --self-contained false -p:PublishSingleFile=true -o dist"
   },
   "author": "",
   "license": "ISC"
