@@ -8,8 +8,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>NetworkMonitor.Collector</AssemblyName>
     <RootNamespace>NetworkMonitorCollector</RootNamespace>
-    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
