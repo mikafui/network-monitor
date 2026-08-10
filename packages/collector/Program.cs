@@ -1,4 +1,31 @@
+using System.IO.Pipes;
+using System.Text;
 using NetworkMonitorCollector;
+
+string? pipeName = GetArgument(args, "--pipe");
+
+if (string.IsNullOrWhiteSpace(pipeName))
+{
+  Console.Error.WriteLine("--pipe wurde nicht angegeben.");
+  Environment.ExitCode = 2;
+  return;
+}
+
+using var pipe = new NamedPipeClientStream(".", pipeName, PipeDirection.Out, PipeOptions.Asynchronous);
+
+try
+{
+  await pipe.ConnectAsync(10_000);
+}
+catch (Exception ex)
+{
+  Console.Error.WriteLine($"Pipe-Verbindung fehlgeschlagen: {ex.Message}");
+  Environment.ExitCode = 1;
+  return;
+}
+
+using var writer = new StreamWriter(pipe, new UTF8Encoding(false)) { AutoFlush = true };
+OutputGenerator.SetWriter(writer);
 
 using var collector = new TrafficCollector();
 using var stopped = new CancellationTokenSource();
@@ -38,3 +65,10 @@ try
   }
 }
 catch (OperationCanceledException) { }
+catch (IOException) { }
+
+static string? GetArgument(string[] arguments, string name)
+{
+  int index = Array.IndexOf(arguments, name);
+  return index >= 0 && index + 1 < arguments.Length ? arguments[index + 1] : null;
+}
