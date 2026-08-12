@@ -7,12 +7,16 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
-      "program": "${workspaceFolder}/packages/display",
+      "program": "${workspaceFolder}/packages/display/dist/electron/main.js",
       "cwd": "${workspaceFolder}/packages/display",
-      "preLaunchTask": "npm: build:display",
+      "preLaunchTask": "npm: build",
       "sourceMaps": true,
       "outFiles": [
-        "${workspaceFolder}/packages/display/dist/**/*.js"
+        "${workspaceFolder}/packages/display/dist/electron/**/*.js"
+      ],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/packages/display/electron/**",
+        "!**/node_modules/**"
       ],
       "console": "integratedTerminal"
     }

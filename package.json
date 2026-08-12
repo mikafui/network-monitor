@@ -1,7 +1,7 @@
 {
   "name": "network-monitor",
   "version": "0.0.0",
-  "main": "packages/display/dist/main.js",
+  "main": "packages/display/dist/electron/main.js",
   "scripts": {
     "lint": "npm run lint:es && npm run lint:style",
     "lint:es": "eslint --fix --flag unstable_native_nodejs_ts_config .",

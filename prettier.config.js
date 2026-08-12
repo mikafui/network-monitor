@@ -6,5 +6,13 @@ export default {
   semi: true,
   printWidth: 160,
   endOfLine: 'lf',
-  htmlWhitespaceSensitivity: 'ignore'
+  htmlWhitespaceSensitivity: 'ignore',
+  overrides: [
+    {
+      files: '*.html',
+      options: {
+        parser: 'angular'
+      }
+    }
+  ]
 };
