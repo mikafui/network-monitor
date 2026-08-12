@@ -4,6 +4,7 @@ import type { Server, Socket } from 'node:net';
 import { app } from 'electron';
 import { spawn } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import net from 'node:net';
 import path from 'node:path';
 
@@ -15,7 +16,7 @@ function collectorPath(): string {
     return path.join(process.resourcesPath, 'collector', 'NetworkMonitor.Collector.exe');
   }
 
-  return path.resolve(app.getAppPath(), '..', 'collector', 'bin', 'Release', 'net10.0-windows', 'NetworkMonitor.Collector.exe');
+  return path.resolve(__dirname, '..', '..', '..', '..', 'collector', 'bin', 'Release', 'net10.0-windows', 'NetworkMonitor.Collector.exe');
 }
 
 export function startCollector(window: BrowserWindow) {
@@ -49,7 +50,17 @@ export function stopCollector() {
 }
 
 function startElevatedCollector(window: BrowserWindow, pipeName: string): void {
-  const executable = collectorPath().replaceAll("'", "''");
+  const collectorExecutable = collectorPath();
+
+  if (!existsSync(collectorExecutable)) {
+    window.webContents.send('traffic:update', {
+      type: 'error',
+      message: `Collector wurde nicht gefunden: ${collectorExecutable}. Bitte zuerst den Collector bauen.`
+    });
+    return;
+  }
+
+  const executable = collectorExecutable.replaceAll("'", "''");
   const command = [
     "$ErrorActionPreference = 'Stop'",
     `$process = Start-Process -FilePath '${executable}' -ArgumentList '--pipe','${pipeName}' -Verb RunAs -WindowStyle Hidden -PassThru`,
