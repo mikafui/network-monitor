@@ -3,19 +3,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Display: Electron Main",
+      "name": "Electron: Main",
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd",
-      "program": "${workspaceFolder}/packages/display/dist/electron/main.js",
-      "cwd": "${workspaceFolder}/packages/display",
+      "program": "${workspaceFolder}/packages/electron/dist/main.js",
+      "cwd": "${workspaceFolder}",
       "preLaunchTask": "npm: build",
       "sourceMaps": true,
       "outFiles": [
-        "${workspaceFolder}/packages/display/dist/electron/**/*.js"
+        "${workspaceFolder}/packages/electron/dist/**/*.js"
       ],
       "resolveSourceMapLocations": [
-        "${workspaceFolder}/packages/display/electron/**",
+        "${workspaceFolder}/packages/electron/src/**",
         "!**/node_modules/**"
       ],
       "console": "integratedTerminal"

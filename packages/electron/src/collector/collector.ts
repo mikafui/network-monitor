@@ -16,7 +16,7 @@ function collectorPath(): string {
     return path.join(process.resourcesPath, 'collector', 'NetworkMonitor.Collector.exe');
   }
 
-  return path.resolve(__dirname, '..', '..', '..', '..', 'collector', 'bin', 'Release', 'net10.0-windows', 'NetworkMonitor.Collector.exe');
+  return path.resolve(__dirname, '..', '..', '..', 'collector', 'bin', 'Release', 'net10.0-windows', 'NetworkMonitor.Collector.exe');
 }
 
 export function startCollector(window: BrowserWindow) {

@@ -21,7 +21,7 @@ function createWindow() {
     }
   });
 
-  window.loadFile(path.join(__dirname, '..', 'frontend', 'browser', 'index.html'));
+  window.loadFile(path.join(__dirname, '..', '..', 'ui', 'dist', 'browser', 'index.html'));
   window.webContents.once('did-finish-load', () => {
     startCollector(window!);
   });

@@ -1,16 +1,13 @@
 {
-  "name": "display",
+  "name": "@network-monitor/ui",
   "version": "1.0.0",
   "private": true,
-  "main": "dist/electron/main.js",
   "scripts": {
-    "ng": "cd frontend && ng",
-    "start": "npm run build && electron .",
-    "build": "npm run build:frontend && npm run build:electron",
-    "build:frontend": "cd frontend && ng build --project display --configuration production",
-    "build:electron": "tsc --project electron/tsconfig.json",
-    "watch:frontend": "cd frontend && ng build --project display --configuration development --watch",
-    "test": "cd frontend && ng test --project display"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build --project ui --configuration production",
+    "watch": "ng build --project ui --configuration development --watch",
+    "test": "ng test --project ui"
   },
   "dependencies": {
     "@angular/common": "^22.1.0",
@@ -27,7 +24,6 @@
     "@angular/cli": "^22.1.3",
     "@angular/compiler-cli": "^22.1.0",
     "@types/node": "^26.2.0",
-    "electron": "43.3.0",
     "jsdom": "^28.0.0",
     "typescript": "~6.0.2",
     "vitest": "^4.0.8"

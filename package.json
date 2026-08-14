@@ -1,7 +1,7 @@
 {
   "name": "network-monitor",
   "version": "0.0.0",
-  "main": "packages/display/dist/electron/main.js",
+  "main": "packages/electron/dist/main.js",
   "scripts": {
     "lint": "npm run lint:es && npm run lint:style",
     "lint:es": "eslint --fix --flag unstable_native_nodejs_ts_config .",
@@ -12,17 +12,19 @@
     "test:project:components": "vitest --project components",
     "test:coverage": "vitest run --coverage",
     "prepare": "husky",
-    "build:collector": "npm run build --workspace=collector",
-    "build:display": "npm run build --workspace=display",
-    "build": "npm run build:collector && npm run build:display",
-    "publish:collector": "npm run publish --workspace=collector",
-    "package": "npm run publish:collector && npm run build:display && electron-builder --win"
+    "build:collector": "npm run build --workspace=packages/collector",
+    "build:ui": "npm run build --workspace=packages/ui",
+    "build:electron": "npm run build --workspace=packages/electron",
+    "build": "npm run build:collector && npm run build:ui && npm run build:electron",
+    "start": "npm run build:ui && npm run build:electron && electron .",
+    "publish:collector": "npm run publish --workspace=packages/collector",
+    "package": "npm run publish:collector && npm run build:ui && npm run build:electron && electron-builder --win"
   },
   "build": {
     "appId": "de.mikafui.networkmonitor",
     "productName": "Network Monitor",
     "directories": { "output": "dist" },
-    "files": ["packages/display/dist/**/*", "packages/display/package.json"],
+    "files": ["packages/electron/dist/**/*", "packages/electron/package.json", "packages/ui/dist/**/*"],
     "extraResources": [
       { "from": "packages/collector/dist", "to": "collector" },
       { "from": "assets/icon.png", "to": "icon.png" }
